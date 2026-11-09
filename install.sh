@@ -2,8 +2,12 @@
 # HotCut CNC — instalador para Linux (Fedora/RHEL, Ubuntu/Debian o portable).
 #
 # Uso recomendado (revisando antes el script):
-#   curl -fsSLO https://termocortadoras-cnc.es/descargas/install.sh
+#   curl -fsSLO https://raw.githubusercontent.com/hotcut-cnc/apps/main/pro/install.sh
 #   less install.sh
+#   sudo bash install.sh
+#
+# El instalador genérico (sin edición predefinida) está en la raíz del repo:
+#   curl -fsSLO https://raw.githubusercontent.com/hotcut-cnc/apps/main/install.sh
 #   sudo bash install.sh --edition pro
 #
 # Ejemplos:
@@ -19,13 +23,16 @@
 set -euo pipefail
 
 APP="HotCut CNC"
-DEFAULT_BASE_URL="https://termocortadoras-cnc.es/descargas"
+DEFAULT_BASE_URL="https://raw.githubusercontent.com/hotcut-cnc/apps/main"
 DEFAULT_VERSION="1.0"
+# Edición por defecto. Las copias dentro de cada carpeta (pro/install.sh,
+# 4axis/install.sh, …) la cambian para que `sudo bash install.sh` baste.
+DEFAULT_EDITION="pro"
 # Huella de la clave de release de HotCut (Termocortadoras CNC).
 KEY_FPR="B4B0B9C5920C12F239F6DEB6F2F90F2AD6B7E2E2"
 KEY_FILE="RPM-GPG-KEY-hotcut.asc"
 
-EDITION="pro"
+EDITION="$DEFAULT_EDITION"
 VERSION=""
 BASE_URL="$DEFAULT_BASE_URL"
 METHOD="auto"          # auto | rpm | deb | portable
